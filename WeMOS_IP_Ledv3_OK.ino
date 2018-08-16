@@ -1,6 +1,7 @@
 /*
 http://www.esp8266learning.com/wemos-webserver-example.php
 USB-SERIAL CH340 (COM23)
+Branch 4 - edited ino file
 */
 
 #include <ESP8266WiFi.h>
@@ -16,8 +17,8 @@ const char* password = "12348765";
 //const char* password = "A120506p";
 
 
-//const char* ssid     = "eee-iot";
-//const char* password = "howIknow@07";
+//const char* ssid     = "*********";
+//const char* password = "*********";
  
 int ledPin = D5;
 WiFiServer server(80);
