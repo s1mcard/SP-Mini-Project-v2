@@ -7,10 +7,10 @@ Branch 4 - edited ino file
 #include <ESP8266WiFi.h>
  
 const char* ssid = "12-219";
-const char* password = "12348765";
+const char* password = "12348765123";
 
 //const char* ssid = "E5830-5784-ABC";
-//const char* password = "37714601";
+//const char* password = "37714601123";
 
 
 //const char* ssid = "APn22";
