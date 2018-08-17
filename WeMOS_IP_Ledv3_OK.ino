@@ -110,75 +110,16 @@ void loop() {
  
  /*
  //Commented off on 17-Aug-2018 22:58
- // Check if a client has connected
-  WiFiClient client = server.available();
-  if (!client) {
-    return;
-  }
- 
-  // Wait until the client sends some data
-  Serial.println("new client");
-  while(!client.available()){
-    delay(1);
-  }
- 
-  // Read the first line of the request
-  String request = client.readStringUntil('\r');
-  Serial.println(request);
-  client.flush();
- 
-  // Match the request
- 
-  int value = LOW;
-  if (request.indexOf("/LED=ON") != -1) {
-    digitalWrite(ledPin, HIGH);
-    value = HIGH;
-  } 
-  if (request.indexOf("/LED=OFF") != -1){
-    digitalWrite(ledPin, LOW);
-    value = LOW;
-  }
- 
- 
- 
-  // Return the response
-  client.println("HTTP/1.1 200 OK");
-  client.println("Content-Type: text/html");
-  client.println(""); //  do not forget this one
-  client.println("<!DOCTYPE HTML>");
-  client.println("<html>");
-
-  client.print("SSID is ");
-  client.print(ssid); 
-  client.println("<br>");
-
-  client.print("IP is ");
-  client.print(WiFi.localIP());
-  client.println("<br>");
-  client.print("Led pin is now: ");
-   
-  if(value == HIGH) {
-    client.print("On");  
-  } else {
-    client.print("Off");
-  }
-  
-  client.println("<br>");
-  client.println("Click <a href=\"/LED=ON\">here</a> turn the LED on pin 5 ON<br>");
-  client.println("Click <a href=\"/LED=OFF\">here</a> turn the LED on pin 5 OFF<br>");
-  client.println("</html>");
- 
-  delay(10);
-  Serial.println("Client disconnected");
-  Serial.println("");
-//Commented off on 17-Aug-2018 22:58
+ //Deleted as f01_connectWifi () has been tested runnning ok
+ //Commented off on 17-Aug-2018 22:58
 */
 
-} //void
+} //void_loop
 
 //[D]////////////////////////////////////////////////////////////////////////////////////
 //[D1]
-void blinkLED () {
+void blinkLED () 
+{
   digitalWrite(LED_BUILTIN, LOW);   // Turn the LED on (Note that LOW is the voltage level
                                     // but actually the LED is on; this is because 
                                     // it is active low on the ESP-01)
@@ -188,7 +129,8 @@ void blinkLED () {
 }
 
 //[D2]
-void  f01_connectWifi () {
+void  f01_connectWifi () 
+{
  // Check if a client has connected
   WiFiClient client = server.available();
   if (!client) 
