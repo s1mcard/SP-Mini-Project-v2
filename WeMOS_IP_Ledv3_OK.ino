@@ -1,19 +1,34 @@
 /*
-WeMOS D1 R1 
-USB-SERIAL CH340 (COM23)
-Disclaimer: 
+[i]Disclaimer: 
 This is a cut and paste from various sources of code for a school project.
 Not all the codes are written from scratch.
 
-Notes:
+[ii] What does this sketch do ?
+It connects to an AP and uses the ip that is allocated to turn on/off an LED connected on pin 5
+
+[iii] Selection for WeMOS D1 R1 when using Android Studio 
+USB-SERIAL CH340 (COM23)
+
+[iv] The output on http://192.168.2.2 (Example)
+-----------------------------------------------
+Led pin is now: On
+Click here turn the LED on pin 5 ON
+Click here turn the LED on pin 5 OFF
+-----------------------------------------------
+
+[v] Notes:
 [N1] The pinout of WeMos D1 R2 is different
 [N2] Some pictures of the WeMos D1 R1 also has different pin out
 [N3] The pinout below is a "picture" of my actual WeMos D1 R1
 [N4] All pins are rated 3.3v
 
 
-Picture: https://www.facebook.com/photo.php?fbid=699102057112770&set=p.699102057112770&type=3&theater
-  __________                   __               ___ 
+[vi] Picture: https://www.facebook.com/photo.php?fbid=699102057112770&set=p.699102057112770&type=3&theater
+
+
+                   ___/LED\__________
+                  |                  |
+  __________      |             __   |            ___ 
  |          +-+-+-+-+-+-+-+-+-+  +-+-+-+-+-+-+-+    \
  |          D D - G D D D D D D  D D D D D D D D     \    
  |          1 1   N 1 1 1 1 0 0  0 0 0 0 0 0 0 0      \_   
@@ -46,16 +61,6 @@ PowerJack |     5 S 3 5 N N I    A                      |
 const char* ssid = "12-219";
 const char* password = "12348765123";
 
-//const char* ssid = "E5830-5784-ABC";
-//const char* password = "37714601123";
-
-
-//const char* ssid = "APn22";
-//const char* password = "A120506p";
-
-
-//const char* ssid     = "*********";
-//const char* password = "*********";
  
 int ledPin = D5;
 WiFiServer server(80);
@@ -72,7 +77,7 @@ void setup() {
   // Connect to WiFi network
   Serial.println();
   Serial.println();
-  Serial.println("WeNOS_IP_ledv3.ino");
+  Serial.println("GitHub version - WeNOS_IP_ledv3.ino");
   Serial.print("Connecting to ");
   Serial.println(ssid);
  
@@ -255,7 +260,7 @@ void  f01_connectWifi () {
   Serial.println("Client disconnected");
   Serial.println("");
 //Commented off on 17-Aug-2018 22:58
-*/
+
 
 } 
 
