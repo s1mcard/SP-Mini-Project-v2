@@ -61,27 +61,27 @@ PowerJack |     5 S 3 5 N N I    A                      |
 #include <ESP8266WiFi.h>
  
 const char* ssid = "12-219";
-const char* password = "12348765";
+const char* password = "12348765ABC";
 
  
-//int ledPin = D5; // to be deleted in version 3b
 WiFiServer server(80);
  
 //[B]////////////////////////////////////////////////////////////////////////////////////
-void setup() {
+void setup() 
+{
   Serial.begin(115200);
   delay(10);
  
-  const int ledPin;
-  pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, LOW);
+  //const int ledPin = D5;     //To deleted in next release aftering testing
+  //pinMode(ledPin, OUTPUT);   //To deleted in next release aftering testing
+  //digitalWrite(ledPin, LOW); //To deleted in next release aftering testing 
  
   // Connect to WiFi network
   Serial.println();
   Serial.println();
   
   Serial.println("WeNOS_IP_ledv3.ino");
-  Serial.println("GitHub version 3a - added idr ");
+  Serial.println("GitHub version 3b - modified ino ");
     
   Serial.print("Connecting to ");
   Serial.println(ssid);
@@ -112,32 +112,21 @@ void setup() {
 void loop() {
 
  f01_connectWifi ();
- 
- /*
- //Commented off on 17-Aug-2018 22:58
- //Deleted as f01_connectWifi () has been tested runnning ok
- //Commented off on 17-Aug-2018 22:58
-*/
+ f02_idr ();
 
 } //void_loop
 
 //[D]////////////////////////////////////////////////////////////////////////////////////
-//[D1]
-void blinkLED () 
-{
-  digitalWrite(LED_BUILTIN, LOW);   // Turn the LED on (Note that LOW is the voltage level
-                                    // but actually the LED is on; this is because 
-                                    // it is active low on the ESP-01)
-  delay(1000);                      // Wait for a second
-  digitalWrite(LED_BUILTIN, HIGH);  // Turn the LED off by making the voltage HIGH
-  delay(2000);                      // Wait for two seconds (to demonstrate the active low LED)
-}
 
-//[D2]
+//[D1-F01]
 void  f01_connectWifi () 
 {
  // Picture of the pinout of the WeMos D1 R1 
  //https://www.facebook.com/photo.php?fbid=699102057112770&l=abd6baaafc
+  
+  const int ledPin = D5;
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, LOW);
 
   // Check if a client has connected
   WiFiClient client = server.available();
@@ -212,7 +201,7 @@ void  f01_connectWifi ()
 //Commented off on 17-Aug-2018 22:58
 } //f01
 
-//[D3]
+//[D01-f02]
 void f02_idr ()
 {
 //http://www.esp32learning.com/code/esp32-and-ldr-example.php
@@ -239,6 +228,21 @@ void f02_idr ()
    
   }
 }//f02  
+
+
+
+//[D100]
+void blinkLED () 
+{
+  //For testing the board to ensure it is working
+  
+  digitalWrite(LED_BUILTIN, LOW);   // Turn the LED on (Note that LOW is the voltage level
+                                    // but actually the LED is on; this is because 
+                                    // it is active low on the ESP-01)
+  delay(1000);                      // Wait for a second
+  digitalWrite(LED_BUILTIN, HIGH);  // Turn the LED off by making the voltage HIGH
+  delay(2000);                      // Wait for two seconds (to demonstrate the active low LED)
+}
 
 //[END]/////////////////////////////////////////////////////////////////////////////////
 //Appendix
