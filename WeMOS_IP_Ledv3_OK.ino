@@ -95,7 +95,7 @@ void setup()
   Serial.println();
   
   Serial.println("WeNOS_IP_ledv3.ino");
-  Serial.println("GitHub version 3b - modified ino ");
+  Serial.println("GitHub version 3c -added pir hc-sr501 ");
     
   Serial.print("Connecting to ");
   Serial.println(ssid);
@@ -222,10 +222,13 @@ void f02_idr ()
 //This is a 5v sensor  
 //Using 2Kohm + 1Kohm resistor low level the voltage from IDR to A0
 
+  //To be tested in next release
   int idrReading;
-  pinMode (D2,OUTPUT);
+  int idrPin = A0;
+  int idrLed = D2
+  pinMode (idrLed,OUTPUT);
     
-  idrReading = analogRead(A0); // read analog input pin 0
+  idrReading = analogRead(idrPin); // read analog input pin 0
   Serial.print(idrReading, DEC); // prints the value read
   Serial.print(" \n"); // prints a space between the numbers
   delay(1000); // wait 100ms for next reading
@@ -233,14 +236,18 @@ void f02_idr ()
   //idrReading is greater than 500 when block completely
   //idrReading is less    than 150 when not blocked
   //idrReading sensitivity is adjustable
-  
-  if (idrReading > 500)
+
+  if (idrReading > 400)
   { 
-    digitalWrite (D2,HIGH);
-    delay (5000);
-    digitalWrite (D2,LOW);
-   
+    digitalWrite (idrLed,HIGH);
   }
+
+  if (idrReading < 200)
+  { 
+    digitalWrite (idrLed,LOW);
+  }
+
+  
 }//f02  
 
 //[D01-f03]
@@ -248,27 +255,36 @@ void f03_pir ()
 {
     //To be tested with a working pir
     //Source: https://www.elecrow.com/wiki/index.php?title=HC-SR505_Mini_PIR_Motion_Sensor
-    int pirReading = D3;
+    //Source: PIR http://henrysbench.capnfatz.com/henrys-bench/arduino-sensors-and-input/arduino-hc-sr501-motion-sensor-tutorial/
+    
+    boolean pirReading;
+    const int pirPin = D3;
     pinMode(D3,INPUT);
 
-    const int pirLed = D2;
-    pinMode(D2,OUTPUT);
+    const int pirLed = D4;
+    pinMode(pirLed,OUTPUT);
+    digitalWrite(pirLed,LOW);
     
-    pirReading = digitalRead(D3);  
+    pirReading = digitalRead(pirPin);  
+    Serial.println("The PIR recieves a ");
+    Serial.print(pirReading);
+    Serial.println(" ");
     
-    if(pirReading == HIGH)  
+    if(pirReading == 1)  
     {
-      Serial.println("Somebody is here.");
+      Serial.println("PIR is high.");
       digitalWrite(pirLed,HIGH);
     }
-    else  
+
+    if(pirReading == 0)  
     {
-      Serial.println("Nobody.");
+      Serial.println("PIR is low");
       digitalWrite(pirLed,LOW);
     }
     
-    delay(5000);
+    delay(100);
 }//f03
+
 
 
 
@@ -290,3 +306,4 @@ void blinkLED ()
 // [01] WeMos D1 R1 Pinout https://www.facebook.com/photo.php?fbid=699102057112770&l=abd6baaafc
 // [02] IDR Pinout         https://www.facebook.com/photo.php?fbid=699688150387494&l=8db126e1e1
 // [03] PIR https://www.elecrow.com/wiki/index.php?title=HC-SR505_Mini_PIR_Motion_Sensor
+// [04] PIR http://henrysbench.capnfatz.com/henrys-bench/arduino-sensors-and-input/arduino-hc-sr501-motion-sensor-tutorial/
