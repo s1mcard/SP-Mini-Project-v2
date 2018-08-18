@@ -52,6 +52,20 @@ PowerJack |     5 S 3 5 N N I    A                      |
  |____________+-+-+-+-+-+-+-+____+-+-+-+-+-+___________/
  
  
+http://www.esp8266learning.com/wemos-d1-esp8266-based-board.php
+Pin  Function  ESP-8266 Pin
+D0      RX        GPIO3
+D1      TX        GPIO1
+D2      IO        GPIO16
+D3(D15) IO,SCL    GPIO5
+D4(D14) IO,SDA    GPIO4
+D5(D13) IO,SCK    GPIO14
+D6(D12) IO,MISO   GPIO12
+D7(D11) IO,MOSI   GPIO13
+D8  IO,Pull-up    GPIO0
+D9  IO,pull-up, BUILTIN_LED GPIO2
+D10 IO,pull-down,SS GPIO15
+A0  Analog Input  A0
  
 
 */
@@ -229,9 +243,36 @@ void f02_idr ()
   }
 }//f02  
 
+//[D01-f03]
+void f03_pir ()  
+{
+    //To be tested with a working pir
+    //Source: https://www.elecrow.com/wiki/index.php?title=HC-SR505_Mini_PIR_Motion_Sensor
+    int pirReading = D3;
+    pinMode(D3,INPUT);
+
+    const int pirLed = D2;
+    pinMode(D2,OUTPUT);
+    
+    pirReading = digitalRead(D3);  
+    
+    if(pirReading == HIGH)  
+    {
+      Serial.println("Somebody is here.");
+      digitalWrite(pirLed,HIGH);
+    }
+    else  
+    {
+      Serial.println("Nobody.");
+      digitalWrite(pirLed,LOW);
+    }
+    
+    delay(5000);
+}//f03
 
 
-//[D100]
+
+//[D01-100]
 void blinkLED () 
 {
   //For testing the board to ensure it is working
@@ -248,3 +289,4 @@ void blinkLED ()
 //Appendix
 // [01] WeMos D1 R1 Pinout https://www.facebook.com/photo.php?fbid=699102057112770&l=abd6baaafc
 // [02] IDR Pinout         https://www.facebook.com/photo.php?fbid=699688150387494&l=8db126e1e1
+// [03] PIR https://www.elecrow.com/wiki/index.php?title=HC-SR505_Mini_PIR_Motion_Sensor
