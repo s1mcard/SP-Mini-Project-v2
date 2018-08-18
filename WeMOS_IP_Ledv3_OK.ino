@@ -23,8 +23,7 @@ Click here turn the LED on pin 5 OFF
 [N4] All pins are rated 3.3v
 
 
-[vi] Picture: https://www.facebook.com/photo.php?fbid=699102057112770&set=p.699102057112770&type=3&theater
-
+[vi] Picture: https://www.facebook.com/photo.php?fbid=699102057112770&l=abd6baaafc
 
                    ___/LED\__________
                   |                  |
@@ -51,6 +50,9 @@ Click here turn the LED on pin 5 OFF
 PowerJack |     5 S 3 5 N N I    A                      |
  |--------    - v T v v D D N    0 - - - - -            /
  |____________+-+-+-+-+-+-+-+____+-+-+-+-+-+___________/
+ 
+ 
+ 
 
 */
 
@@ -59,10 +61,10 @@ PowerJack |     5 S 3 5 N N I    A                      |
 #include <ESP8266WiFi.h>
  
 const char* ssid = "12-219";
-const char* password = "12348765123";
+const char* password = "12348765";
 
  
-int ledPin = D5;
+//int ledPin = D5; // to be deleted in version 3b
 WiFiServer server(80);
  
 //[B]////////////////////////////////////////////////////////////////////////////////////
@@ -70,14 +72,17 @@ void setup() {
   Serial.begin(115200);
   delay(10);
  
- 
+  const int ledPin;
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, LOW);
  
   // Connect to WiFi network
   Serial.println();
   Serial.println();
-  Serial.println("GitHub version - WeNOS_IP_ledv3.ino");
+  
+  Serial.println("WeNOS_IP_ledv3.ino");
+  Serial.println("GitHub version 3a - added idr ");
+    
   Serial.print("Connecting to ");
   Serial.println(ssid);
  
@@ -131,7 +136,10 @@ void blinkLED ()
 //[D2]
 void  f01_connectWifi () 
 {
- // Check if a client has connected
+ // Picture of the pinout of the WeMos D1 R1 
+ //https://www.facebook.com/photo.php?fbid=699102057112770&l=abd6baaafc
+
+  // Check if a client has connected
   WiFiClient client = server.available();
   if (!client) 
   {
@@ -194,16 +202,45 @@ void  f01_connectWifi ()
   }
   
   client.println("<br>");
-  client.println("Click <a href=\"/LED=ON\">here</a> turn the LED on pin 5 ON<br>");
-  client.println("Click <a href=\"/LED=OFF\">here</a> turn the LED on pin 5 OFF<br>");
+  client.println("Click <a href=\"/LED=ON\">Turn  ON</a> the LED on pin 5<br>");
+  client.println("Click <a href=\"/LED=OFF\">Turn OFF</a> the LED on pin 5<br>");
   client.println("</html>");
  
   delay(10);
   Serial.println("Client disconnected");
   Serial.println("");
 //Commented off on 17-Aug-2018 22:58
+} //f01
 
+//[D3]
+void f02_idr ()
+{
+//http://www.esp32learning.com/code/esp32-and-ldr-example.php
+//This is a 5v sensor  
+//Using 2Kohm + 1Kohm resistor low level the voltage from IDR to A0
 
-} 
+  int idrReading;
+  pinMode (D2,OUTPUT);
+    
+  idrReading = analogRead(A0); // read analog input pin 0
+  Serial.print(idrReading, DEC); // prints the value read
+  Serial.print(" \n"); // prints a space between the numbers
+  delay(1000); // wait 100ms for next reading
+
+  //idrReading is greater than 500 when block completely
+  //idrReading is less    than 150 when not blocked
+  //idrReading sensitivity is adjustable
+  
+  if (idrReading > 500)
+  { 
+    digitalWrite (D2,HIGH);
+    delay (5000);
+    digitalWrite (D2,LOW);
+   
+  }
+}//f02  
 
 //[END]/////////////////////////////////////////////////////////////////////////////////
+//Appendix
+// [01] WeMos D1 R1 Pinout https://www.facebook.com/photo.php?fbid=699102057112770&l=abd6baaafc
+// [02] IDR Pinout         https://www.facebook.com/photo.php?fbid=699688150387494&l=8db126e1e1
