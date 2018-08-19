@@ -334,5 +334,6 @@ void blinkLED ()
 //Appendix
 // [01] WeMos D1 R1 Pinout https://www.facebook.com/photo.php?fbid=699102057112770&l=abd6baaafc
 // [02] IDR Pinout         https://www.facebook.com/photo.php?fbid=699688150387494&l=8db126e1e1
-// [03] PIR https://www.elecrow.com/wiki/index.php?title=HC-SR505_Mini_PIR_Motion_Sensor
-// [04] PIR http://henrysbench.capnfatz.com/henrys-bench/arduino-sensors-and-input/arduino-hc-sr501-motion-sensor-tutorial/
+// [03] PIR HC-SR505 https://www.elecrow.com/wiki/index.php?title=HC-SR505_Mini_PIR_Motion_Sensor
+// [04] PIR HC-SR501 http://henrysbench.capnfatz.com/henrys-bench/arduino-sensors-and-input/arduino-hc-sr501-motion-sensor-tutorial/
+// [05] Active Buzzer A3P5 https://www.ebay.com/itm/metal-active-buzzer-module-low-trigger-buzzer-control-board-for-arduino-A3P5-/253361059935
