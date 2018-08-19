@@ -95,7 +95,9 @@ void setup()
   Serial.println();
   
   Serial.println("WeNOS_IP_ledv3.ino");
-  Serial.println("GitHub version 3c -added pir hc-sr501 ");
+  Serial.println("GitHub version 3c -added pir hc-sr501/505 ");
+  Serial.println("GitHub version 3d -added Active Buzzer - A3P5 - pending testing");
+  
     
   Serial.print("Connecting to ");
   Serial.println(ssid);
@@ -125,23 +127,23 @@ void setup()
 //[C]////////////////////////////////////////////////////////////////////////////////////
 void loop() {
 
- f01_connectWifi ();
+ f01_wifiLed ();
  f02_idr ();
-
+ f03_pir ();
+  
 } //void_loop
 
 //[D]////////////////////////////////////////////////////////////////////////////////////
 
 //[D1-F01]
-void  f01_connectWifi () 
+void  f01_wifiLed () 
 {
  // Picture of the pinout of the WeMos D1 R1 
  //https://www.facebook.com/photo.php?fbid=699102057112770&l=abd6baaafc
   
   const int ledPin = D5;
   pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, LOW);
-
+ 
   // Check if a client has connected
   WiFiClient client = server.available();
   if (!client) 
@@ -240,6 +242,7 @@ void f02_idr ()
   if (idrReading > 400)
   { 
     digitalWrite (idrLed,HIGH);
+    f04_activeBuzzer (); //To be tested in next release
   }
 
   if (idrReading < 200)
@@ -274,6 +277,7 @@ void f03_pir ()
     {
       Serial.println("PIR is high.");
       digitalWrite(pirLed,HIGH);
+      f04_activeBuzzer (); //To be tested in next release
     }
 
     if(pirReading == 0)  
@@ -285,6 +289,31 @@ void f03_pir ()
     delay(100);
 }//f03
 
+
+void f04_activeBuzzer ()
+{
+  //source: https://www.sunfounder.com/learn/sensor_kit_v1_for_Arduino/lesson-12-buzzer-sensor-kit-v1-for-arduino.html
+  //source: https://www.circuitar.com/projects/controlling-the-buzzer/
+
+  //This is the one i am using
+  //source: https://www.ebay.com/itm/metal-active-buzzer-module-low-trigger-buzzer-control-board-for-arduino-A3P5-/253361059935
+  
+  
+  int aBuzzerPin = D6;
+  int aBuzzerPower = D7;
+  pinMode(aBuzzerPin,OUTPUT);
+  pinMode(aBuzzerPower,OUTPUT);
+  
+  digitalWrite(aBuzzerPower,HIGH);
+  digitalWrite(aBuzzerPin,HIGH);
+  delay(1000);
+  digitalWrite(aBuzzerPin,LOW);
+  delay(1000);
+
+  digitalWrite(aBuzzerPower,LOW);
+  
+  
+}//void_f04_activeBuzzer
 
 
 
