@@ -6,6 +6,7 @@
 + 2.02 Control LED using IR 
 + 2.03 Control LED using BT
 + 2.04 Update the status of the LED to XAMPP
++ 2.05 Android Application
 
 # [03]BOM
 + WeMOS D1 R1
@@ -15,3 +16,4 @@
 + IR Obstacle sensor
 + IR Transmitter
 + Active Buzzer
++ Heltec WiFi Kit 8 (Courtesy of classmate - Peter Tan)
