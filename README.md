@@ -1,6 +1,2 @@
-# WeMOS_LED
-Controlling the LED using IP Address
-+ Creating branch1
-+ branch2
-+ branch3
-+ branch4
+# SP Mini Project v2
+20180822 added ino for controlling three leds using IR remote controller button 1,2,3
