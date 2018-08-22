@@ -37,6 +37,10 @@
 
 int pinLedGreen = D0;
 
+//https://programmingelectronics.com/tutorial-10-fade-an-led-with-pulse-width-modulation-using-analogwrite/
+int brightness = 0;    // how bright the LED is
+int fadeAmount = 5;    // how many points to fade the LED by
+
 void setup() {
   // put your setup code here, to run once:
     pinMode(pinLedGreen,OUTPUT);  
@@ -44,9 +48,52 @@ void setup() {
 }
 
 void loop() {
+  
   // put your main code here, to run repeatedly:
+  /*
+  //1
   digitalWrite(pinLedGreen,HIGH);
   delay(1000);
   digitalWrite(pinLedGreen,LOW);
   delay (1000);
-}
+  //1
+  */
+  
+  /*
+  //2
+  // set the brightness of pin 9:
+  analogWrite(pinLedGreen, brightness);
+ 
+  // change the brightness for next time through the loop:
+  brightness = brightness + fadeAmount;
+ 
+  // reverse the direction of the fading at the ends of the fade:
+  if (brightness == 0 || brightness == 255) {
+    fadeAmount = -fadeAmount ;
+  }
+  // wait for 30 milliseconds to see the dimming effect
+  delay(30);
+  //2
+  */
+  
+  //3
+  analogWrite(pinLedGreen,0);
+  delay (500);
+  
+  analogWrite(pinLedGreen,50);
+  delay (500);
+
+  analogWrite(pinLedGreen,100);
+  delay (500);
+
+  analogWrite(pinLedGreen,150);
+  delay (500);
+
+  analogWrite(pinLedGreen,200);
+  delay (500);
+
+  analogWrite(pinLedGreen,255);
+  delay (5000);
+  //3
+  
+}//void_loop
