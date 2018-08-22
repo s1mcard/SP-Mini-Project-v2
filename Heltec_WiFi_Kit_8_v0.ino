@@ -1,5 +1,6 @@
 /*
  * Heltec WiFi Kit 8 
+ * https://www.facebook.com/photo.php?fbid=704156653273977&l=676a0f55ab
  * https://robotzero.one/heltec-wifi-kit-8/
  * https://www.aliexpress.com/item/Aihasd-0-91-Inch-OLED-Display-ESP8266-Wifi-Kit8-Development-Board-for-Arduino-NodeMCU-128X32-White/32829791335.html
  * In the Arduino IDE, in the Tools > Board menu choose NodeMCU 1.0 (ESP-12E Module)
