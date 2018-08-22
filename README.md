@@ -4,7 +4,8 @@
 # [02] Objectives
 2.01 Control LED using IP 
 2.02 Control LED using IR 
-2.03 Update the status of the LED to XAMPP
+2.03 Control LED using BT
+2.04 Update the status of the LED to XAMPP
 
 # [03]BOM
 + WeMOS D1 R1
